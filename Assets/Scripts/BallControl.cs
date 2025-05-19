@@ -175,6 +175,8 @@ public class BallControl : MonoBehaviour
         {
             rb.velocity *= 0.96f;
         }
+
+        
         /*if (lastAngleVelocity - rb.angularVelocity.magnitude > slowDownRatio * 100 * lastAngleVelocity)
         {
             rb.angularVelocity *= 0.96f;
