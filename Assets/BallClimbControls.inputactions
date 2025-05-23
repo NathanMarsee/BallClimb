@@ -1,0 +1,91 @@
+{
+    "name": "BallClimbControls",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "3b3c9546-0544-40fb-9754-197befbdf517",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "f00207ec-2079-49c2-ac03-2ebf5ca693a0",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "99863091-03d4-4a8b-914b-2b65e393500a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9ac865e2-b8d0-4f05-b8a0-9ebffd51dd32",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c312e3e4-5ffd-4ecb-913b-19d7907858cd",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "13bebf23-460c-4945-83ed-7c91821d967b",
+            "actions": [
+                {
+                    "name": "Submit",
+                    "type": "Button",
+                    "id": "651ad899-d2af-4e87-9fe3-b8efe38c3aaa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f5667747-fb40-4bcf-b0b8-d5291f20089e",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Controller",
+            "bindingGroup": "Controller",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

@@ -14,7 +14,8 @@ public class BallControl : MonoBehaviour
     public float gravMag;
     public float killplane;
     public float slowDownRatio;
-    public int collisions;
+    public int collisionCount;
+    public bool isJumping = false;
     public bool infiniteMode = false;
     public bool alive = true;
     public float rollGraceSeconds = 0.12f;
@@ -33,8 +34,9 @@ public class BallControl : MonoBehaviour
     private float lastVelocity;
     private bool isRolling = false;
     private float timeSinceGround;
+    private List<Collision> collisions = new List<Collision>();
 
-    private PlayerControls controls;
+    private BallClimbControls controls;
     private bool controlsFound = false;
     public bool restartActive = false;
 
@@ -43,7 +45,6 @@ public class BallControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         rb = GetComponent<Rigidbody>();
         rb.maxAngularVelocity = maxAgularVelocity * 2f;
         //baseMass = rb.mass;
@@ -92,7 +93,7 @@ public class BallControl : MonoBehaviour
                     controlsFound = true;
             }
 
-            if (collisions == 0)
+            if (collisionCount == 0)
             {
                 timeSinceGround += Time.deltaTime;
             }
@@ -103,12 +104,12 @@ public class BallControl : MonoBehaviour
 
             gravDirection = -planeGuide.up;
             Vector3 gravityForce = gravDirection * gravMag;
-            if (collisions == 0)
+            if (collisionCount == 0)
                 gravityForce = gravityForce * 0.8f;
             rb.AddForce(gravityForce);
 
             // Play/Stop rolling sound based on velocity
-            if (rb.velocity.magnitude > minVelocityForRollSound && collisions > 0)
+            if (rb.velocity.magnitude > minVelocityForRollSound && collisionCount > 0)
             {
                 if (!isRolling)
                 {
@@ -176,6 +177,27 @@ public class BallControl : MonoBehaviour
             rb.velocity *= 0.96f;
         }
 
+        Vector3 sumOfNormals = Vector3.zero;
+        int contactCount = 0;
+
+        // Accumulate normal vectors from all collision contacts
+        foreach (Collision collision in collisions)
+        {
+            foreach (ContactPoint contact in collision.contacts)
+            {
+                contactCount++;
+                sumOfNormals += contact.normal;
+            }
+        }
+
+        // Calculate the average normal vector
+        Vector3 averageNormal = sumOfNormals / contactCount;
+
+        if (controls.Gameplay.Jump.ReadValue<float>() > 0.0f && !isJumping)
+        {
+            rb.AddForce(averageNormal * 200);
+            isJumping = true;
+        }
         
         /*if (lastAngleVelocity - rb.angularVelocity.magnitude > slowDownRatio * 100 * lastAngleVelocity)
         {
@@ -189,7 +211,12 @@ public class BallControl : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        collisions++;
+        collisions.Add(collision);
+        if(collisionCount == 0)
+        {
+            isJumping = false;
+        }
+        collisionCount++;
         timeSinceGround = 0;
         if (collisionSound != null && lastVelocity > 1.3 * rb.velocity.magnitude)
         {
@@ -201,8 +228,9 @@ public class BallControl : MonoBehaviour
     }
     private void OnCollisionExit(Collision collision)
     {
-        collisions--;
-        if (collisions <= 0 && rb.velocity.magnitude < minVelocityForRollSound && timeSinceGround > rollGraceSeconds)
+        collisions.Remove(collision);
+        collisionCount--;
+        if (collisionCount <= 0 && rb.velocity.magnitude < minVelocityForRollSound && timeSinceGround > rollGraceSeconds)
         {
             rollingSoundSource.Pause();
             isRolling = false;

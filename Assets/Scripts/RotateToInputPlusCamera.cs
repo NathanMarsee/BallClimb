@@ -8,7 +8,7 @@ public class RotateToInputPlusCamera : MonoBehaviour
 {
     public GameObject cam;
     public GameObject player;
-    public PlayerControls controls;
+    public BallClimbControls controls;
 
     public float offset;
     public Vector2 move;
@@ -22,7 +22,7 @@ public class RotateToInputPlusCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        controls = new PlayerControls();
+        controls = new BallClimbControls();
         controls.Enable();
 
         if (player == null)
