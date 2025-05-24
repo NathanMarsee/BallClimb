@@ -172,6 +172,10 @@ public class BallControl : MonoBehaviour
         gravDirection = -planeGuide.up;
         rb.AddForce(gravDirection * gravMag * 0.5f);
 
+        Vector3 aimDirection = Vector3.Cross(planeGuide.up.normalized, Vector3.up.normalized);
+        aimDirection = Vector3.Cross(aimDirection.normalized, Vector3.up.normalized).normalized;
+        rb.AddForce(aimDirection * 0.35f);
+
         if (lastVelocity - rb.velocity.magnitude > slowDownRatio * 100 * lastVelocity)
         {
             rb.velocity *= 0.96f;
