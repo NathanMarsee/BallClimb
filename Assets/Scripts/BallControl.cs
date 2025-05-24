@@ -198,7 +198,7 @@ public class BallControl : MonoBehaviour
             rb.AddForce(averageNormal * 200);
             isJumping = true;
         }
-        
+
         /*if (lastAngleVelocity - rb.angularVelocity.magnitude > slowDownRatio * 100 * lastAngleVelocity)
         {
             rb.angularVelocity *= 0.96f;
@@ -212,7 +212,7 @@ public class BallControl : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         collisions.Add(collision);
-        if(collisionCount == 0)
+        if (collisionCount == 0)
         {
             isJumping = false;
         }
