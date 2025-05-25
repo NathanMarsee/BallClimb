@@ -19,6 +19,7 @@ public class BallControl : MonoBehaviour
     public bool infiniteMode = false;
     public bool alive = true;
     public float rollGraceSeconds = 0.12f;
+    public Vector3 spawnpoint;
 
     [Header("Sound Settings")]
     public float minVelocityForRollSound = 0.5f;
@@ -40,6 +41,8 @@ public class BallControl : MonoBehaviour
     private bool controlsFound = false;
     public bool restartActive = false;
 
+    private bool pressedRestart = false;
+
     //private float baseMass;
     //private Vector3 spinDirection;
     // Start is called before the first frame update
@@ -48,6 +51,7 @@ public class BallControl : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.maxAngularVelocity = maxAgularVelocity * 2f;
         //baseMass = rb.mass;
+        spawnpoint = transform.position;
 
         if (planeGuide == null)
         {
@@ -78,13 +82,13 @@ public class BallControl : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (restartActive)
+        /*if (restartActive)
         {
             if (controls.UI.Submit.ReadValue<float>() > 0.5f)
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-        else
-        {
+        }*/
+        //else
+        //{
 
             if (!controlsFound)
             {
@@ -92,8 +96,20 @@ public class BallControl : MonoBehaviour
                 if (controls != null)
                     controlsFound = true;
             }
+        if (controls.Gameplay.Restart.ReadValue<float>() < 0.5f && pressedRestart)
+        {
+            pressedRestart = false;
+        }
+            if (controls.Gameplay.Restart.ReadValue<float>() > 0.5f && !pressedRestart)
+        {
+            pressedRestart = true;
+            transform.position = spawnpoint; 
+            transform.rotation = Quaternion.identity;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
 
-            if (collisionCount == 0)
+        if (collisionCount == 0)
             {
                 timeSinceGround += Time.deltaTime;
             }
@@ -165,7 +181,7 @@ public class BallControl : MonoBehaviour
             {
                 rb.mass = baseMass;
             }*/
-        }
+        //}
     }
     void OnCollisionStay()
     {
@@ -174,7 +190,12 @@ public class BallControl : MonoBehaviour
 
         Vector3 aimDirection = Vector3.Cross(planeGuide.up.normalized, Vector3.up.normalized);
         aimDirection = Vector3.Cross(aimDirection.normalized, Vector3.up.normalized).normalized;
-        rb.AddForce(aimDirection * 0.35f);
+
+        Vector2 move = controls.Gameplay.Move.ReadValue<Vector2>();
+        float inputIntensity = (move.x * move.x + move.y * move.y);
+        float forceReductionBySpeed = (-0.067f * lastVelocity) + 1;
+        print(forceReductionBySpeed);
+        rb.AddForce(aimDirection * 0.4f * inputIntensity * forceReductionBySpeed);
 
         if (lastVelocity - rb.velocity.magnitude > slowDownRatio * 100 * lastVelocity)
         {
