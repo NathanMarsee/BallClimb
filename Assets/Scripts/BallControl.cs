@@ -194,7 +194,7 @@ public class BallControl : MonoBehaviour
         Vector2 move = controls.Gameplay.Move.ReadValue<Vector2>();
         float inputIntensity = (move.x * move.x + move.y * move.y);
         float forceReductionBySpeed = (-0.067f * lastVelocity) + 1;
-        print(forceReductionBySpeed);
+        //print(forceReductionBySpeed);
         rb.AddForce(aimDirection * 0.4f * inputIntensity * forceReductionBySpeed);
 
         if (lastVelocity - rb.velocity.magnitude > slowDownRatio * 100 * lastVelocity)
@@ -242,14 +242,14 @@ public class BallControl : MonoBehaviour
             isJumping = false;
         }
         collisionCount++;
-        timeSinceGround = 0;
-        if (collisionSound != null && lastVelocity > 1.3 * rb.velocity.magnitude)
+        if (collisionSound != null && (lastVelocity > 1.3 * rb.velocity.magnitude || timeSinceGround > rollGraceSeconds))
         {
             bonkSoundSource.volume = Mathf.Clamp((lastVelocity - rb.velocity.magnitude) * 0.03f, 0, 0.5f);
             bonkSoundSource.pitch = Mathf.Clamp(lastVelocity / 15f, 0.8f, 3) * -0.3f + 1.5f;
             bonkSoundSource.Play();
             //AudioSource.PlayClipAtPoint(collisionSound, collision.contacts[0].point,);
         }
+        timeSinceGround = 0;
     }
     private void OnCollisionExit(Collision collision)
     {
