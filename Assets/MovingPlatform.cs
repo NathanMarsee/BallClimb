@@ -13,7 +13,7 @@ public class MovingPlatform : MonoBehaviour
 
     private Transform previousWaypoint;
     private Transform targetWaypoint;
-    private float timeToWayPoint;
+    //private float timeToWayPoint;
     private float elapsedTime;
 
     private Rigidbody rb;
@@ -25,8 +25,8 @@ public class MovingPlatform : MonoBehaviour
         targetWaypointIndex = 0;
         previousWaypoint = waypoints[targetWaypointIndex];
         targetWaypoint = waypoints[targetWaypointIndex];
-        transform.parent.position = waypoints[targetWaypointIndex].position;
-        transform.parent.rotation = waypoints[targetWaypointIndex].rotation;
+        transform.position = waypoints[targetWaypointIndex].position;
+        transform.rotation = waypoints[targetWaypointIndex].rotation;
         TargetNextWaypoint();
     }
 
@@ -35,7 +35,7 @@ public class MovingPlatform : MonoBehaviour
     {
         elapsedTime += Time.deltaTime;
 
-        float progress = elapsedTime / timeToWayPoint;
+        float progress = elapsedTime / speed;
         progress = Mathf.SmoothStep(0, 1, progress);
         rb.MovePosition(Vector3.Lerp(previousWaypoint.position, targetWaypoint.position, progress));
         rb.MoveRotation(Quaternion.Lerp(previousWaypoint.rotation, targetWaypoint.rotation, progress));
@@ -57,7 +57,7 @@ public class MovingPlatform : MonoBehaviour
 
         elapsedTime = 0;
         float distanceToWaypoint = Vector3.Distance(previousWaypoint.position, targetWaypoint.position);
-        timeToWayPoint = distanceToWaypoint / speed;
+        //timeToWayPoint = distanceToWaypoint / speed;
         //print(targetWaypointIndex + " " + previousWaypoint.position + " " + targetWaypoint.position + " " + timeToWayPoint);
     }
 
