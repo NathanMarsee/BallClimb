@@ -1,6 +1,6 @@
-Astroll
-Astro roll,
-A stroll
+Astroll, 
+astro roll, 
+a stroll...
 
 Orbit is the goal, the expanse of space waits below. . . . roll
 
