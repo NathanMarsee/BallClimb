@@ -22,7 +22,7 @@ public class menu : MonoBehaviour
     public void BallClimb()
     {
         print("BallClimb Selected.");
-        SceneManager.LoadScene("BallClimb");
+        SceneManager.LoadScene("Astroll");
     }
 
     public void QuitingGame()

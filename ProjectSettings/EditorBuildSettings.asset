@@ -8,8 +8,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 954e82cfa81127a45ae5c92224c144d8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BallClimb.unity
     guid: a86234f9541c41841950d22c2fc77407
+  - enabled: 1
+    path: Assets/Scenes/Astroll.unity
+    guid: dae5a3c9ca94f514a915ea695e04fee6
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: acb4a7cca664cd34f8059f68320e0a4d, type: 2}

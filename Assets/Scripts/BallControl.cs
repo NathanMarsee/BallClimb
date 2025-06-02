@@ -41,7 +41,7 @@ public class BallControl : MonoBehaviour
     private bool controlsFound = false;
     public bool restartActive = false;
 
-    private bool pressedRestart = false;
+    //private bool pressedRestart = false;
 
     //private float baseMass;
     //private Vector3 spinDirection;
@@ -96,7 +96,7 @@ public class BallControl : MonoBehaviour
                 if (controls != null)
                     controlsFound = true;
             }
-        if (controls.Gameplay.Restart.ReadValue<float>() < 0.5f && pressedRestart)
+        /*if (controls.Gameplay.Restart.ReadValue<float>() < 0.5f && pressedRestart)
         {
             pressedRestart = false;
         }
@@ -107,7 +107,7 @@ public class BallControl : MonoBehaviour
             transform.rotation = Quaternion.identity;
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-        }
+        }*/
 
         if (collisionCount == 0)
             {
@@ -155,8 +155,9 @@ public class BallControl : MonoBehaviour
                 killplane = transform.position.z / -25 - 10;
             if (transform.position.y < killplane)
             {
-                //SoundManager.Instance?.PlayLevelResetSound();
-                StartCoroutine(Die());
+            //SoundManager.Instance?.PlayLevelResetSound();
+            //StartCoroutine(Die());
+            transform.position = Vector3.zero;
             }
             if (rb.velocity.magnitude < 0.2)
             {
@@ -218,11 +219,11 @@ public class BallControl : MonoBehaviour
         // Calculate the average normal vector
         Vector3 averageNormal = sumOfNormals / contactCount;
 
-        if (controls.Gameplay.Jump.ReadValue<float>() > 0.0f && !isJumping)
+        /*if (controls.Gameplay.Jump.ReadValue<float>() > 0.0f && !isJumping)
         {
             rb.AddForce(averageNormal * 200);
             isJumping = true;
-        }
+        }*/
 
         /*if (lastAngleVelocity - rb.angularVelocity.magnitude > slowDownRatio * 100 * lastAngleVelocity)
         {
