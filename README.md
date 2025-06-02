@@ -1,8 +1,10 @@
-AstroLL 
+Astroll
+Astro roll,
+A stroll
 
 Orbit is the goal, the expanse of space waits below. . . . roll
 
-A One Player 3D physics-based arcade style game that allows you to experience the pull of gravity in space. Climb, jump, roll, bounce across platforms, bridges, and cages in space. Up is relative and to escape the desolation of space, you must use your joystick to precisely maneuver through a maze of challenging obstacles. Remember, space is vast but falling is sometimes just part of the game and your stroll isn't over till you really reach the stars.
+A Single=Player 3D physics-based platformer game that allows you to experience the pull of gravity in space. Climb, jump, roll, bounce across platforms, bridges, and cages in space. Up is relative and to escape the desolation of space, you must use your joystick to precisely maneuver through a maze of challenging obstacles. Remember, space is vast but falling is sometimes just part of the game and your stroll isn't over till you really reach the stars.
 
 Built in Unity for Game Development course
 
