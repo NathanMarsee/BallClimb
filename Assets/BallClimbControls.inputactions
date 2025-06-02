@@ -11,15 +11,17 @@
                     "id": "f00207ec-2079-49c2-ac03-2ebf5ca693a0",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
-                    "name": "Pause",
+                    "name": "PauseG",
                     "type": "Button",
                     "id": "99fa0b88-d1ed-4e9b-b484-92579fff970a",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -96,7 +98,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Pause",
+                    "action": "PauseG",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -107,7 +109,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "Pause",
+                    "action": "PauseG",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "84d9a025-cc65-4d9d-9742-b467287e8a09",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "PauseG",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "73805d8e-9813-4692-9055-d540536c87ef",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "PauseG",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -123,15 +147,17 @@
                     "id": "651ad899-d2af-4e87-9fe3-b8efe38c3aaa",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
-                    "name": "Pause",
+                    "name": "PauseUI",
                     "type": "Button",
                     "id": "7810c7eb-b1b0-4f43-bda4-3e3e29870be8",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -148,12 +174,23 @@
                 },
                 {
                     "name": "",
+                    "id": "0a8c4079-8f31-4816-93fc-80a4e39d9f00",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "ac373723-53fc-4a2b-811c-032e540abe19",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Pause",
+                    "action": "PauseUI",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -164,7 +201,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "Pause",
+                    "action": "PauseUI",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4f6b9771-f46e-4d96-88ad-f2ae26d3cc53",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "PauseUI",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "362af93c-9034-4ae7-82ef-aefd066318b4",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "PauseUI",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

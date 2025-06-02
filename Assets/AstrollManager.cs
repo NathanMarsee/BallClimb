@@ -33,11 +33,11 @@ public class AstrollManager : MonoBehaviour
     {
         if (!won)
         {
-            if ((controls.Gameplay.Pause.ReadValue<float>() < 0.5f || controls.UI.Pause.ReadValue<float>() < 0.5f) && pressedPause)
+            if ((controls.Gameplay.PauseG.ReadValue<float>() < 0.5f || controls.UI.PauseUI.ReadValue<float>() < 0.5f) && pressedPause)
             {
                 pressedPause = false;
             }
-            if ((controls.Gameplay.Pause.ReadValue<float>() > 0.5f || controls.UI.Pause.ReadValue<float>() > 0.5f) && !pressedPause)
+            if ((controls.Gameplay.PauseG.ReadValue<float>() > 0.5f || controls.UI.PauseUI.ReadValue<float>() > 0.5f) && !pressedPause)
             {
                 pressedPause = true;
                 TogglePause();
