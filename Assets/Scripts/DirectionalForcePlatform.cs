@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class DirectionalForcePlatform : MonoBehaviour
 {
-    public Vector3 launchDirection = Vector3.up; // Direction of force
-    public float forceStrength = 10f; // Strength of the force
-    public bool continuousForce = false; // Whether to apply force every frame the object is on the platform
+    public float forceStrength = 10f;         // Strength of the force
+    public bool continuousForce = false;      // Apply force every frame?
 
     private void OnTriggerEnter(Collider other)
     {
         if (!continuousForce && other.attachedRigidbody != null)
         {
-            other.attachedRigidbody.AddForce(launchDirection.normalized * forceStrength, ForceMode.Impulse);
+            Vector3 direction = GetPushDirection(other);
+            other.attachedRigidbody.AddForce(direction * forceStrength, ForceMode.Impulse);
         }
     }
 
@@ -18,7 +18,21 @@ public class DirectionalForcePlatform : MonoBehaviour
     {
         if (continuousForce && other.attachedRigidbody != null)
         {
-            other.attachedRigidbody.AddForce(launchDirection.normalized * forceStrength * Time.deltaTime, ForceMode.VelocityChange);
+            Vector3 direction = GetPushDirection(other);
+            other.attachedRigidbody.AddForce(direction * forceStrength * Time.deltaTime, ForceMode.VelocityChange);
         }
+    }
+
+    // Calculate direction from contact point to object center (away from platform)
+    private Vector3 GetPushDirection(Collider other)
+    {
+        Vector3 contactDirection = (other.transform.position - transform.position).normalized;
+
+        // Optional: project to only use horizontal or vertical directions
+        // Uncomment if you want 2D-style bounce:
+        // contactDirection.y = 0f; // For horizontal-only push
+        // contactDirection = contactDirection.normalized;
+
+        return contactDirection;
     }
 }
